@@ -14,10 +14,10 @@ Most graph learning resources are either:
 
 This course is different.
 
-✅ Learn **from first principles → production-ready systems**
-✅ Build **intuitive + practical understanding**
-✅ Apply concepts to **fraud detection, credit risk, and recommendations**
-✅ Get hands-on with **real tools used in industry**
+* ✅ Learn **from first principles → production-ready systems**
+* ✅ Build **intuitive + practical understanding**
+* ✅ Apply concepts to **fraud detection, credit risk, and recommendations**
+* ✅ Get hands-on with **real tools used in industry**
 
 ---
 
@@ -108,7 +108,7 @@ This course mirrors real industry use-cases like:
 ## 🚀 Getting Started
 
 ```bash
-git clone https://github.com/your-username/graph-course.git
+git clone https://github.com/PriyanshChaudhary/GraphDatabaseAndAnalysis.git
 cd graph-course
 pip install -r requirements.txt
 jupyter notebook
@@ -162,7 +162,7 @@ If you find this useful:
 ## 👨‍💻 Author
 
 **Priyansh Chaudhary**
-Senior Data Scientist | Fraud & Risk | Graph Analytics
+Senior Data Scientist | Fraud & Risk | ML & Graph Analytics
 
 ---
 
@@ -177,14 +177,3 @@ Senior Data Scientist | Fraud & Risk | Graph Analytics
 
 > Graph thinking is a superpower in modern data science.
 > This repository will help you build it — step by step.
-
----
-
-If you want next level polish, I can:
-
-* Add **badges (build, stars, forks, license)**
-* Create **cover banner image**
-* Add **sample dataset + visuals**
-* Make this look like a **top 1% GitHub repo**
-
-Just say 👍
