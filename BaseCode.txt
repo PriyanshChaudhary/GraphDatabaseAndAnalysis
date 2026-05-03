@@ -1,0 +1,763 @@
+
+
+# 📘 **Notebook 01 — Graph Fundamentals**
+
+---
+
+## 🧠 Introduction
+
+Graphs are a powerful way to represent relationships.
+
+A graph consists of:
+
+* **Nodes (Vertices)** → entities (users, accounts)
+* **Edges** → relationships (transactions, connections)
+
+---
+
+## ⚙️ Setup
+
+```python
+# Install if needed
+# !pip install networkx matplotlib
+```
+
+```python
+import networkx as nx
+import matplotlib.pyplot as plt
+```
+
+---
+
+## 🔹 Create a Simple Graph
+
+```python
+G = nx.Graph()
+
+# Add nodes
+G.add_node("A")
+G.add_node("B")
+
+# Add edge
+G.add_edge("A", "B")
+
+print("Nodes:", G.nodes())
+print("Edges:", G.edges())
+```
+
+---
+
+## 🔹 Add Multiple Nodes & Edges
+
+```python
+G.add_nodes_from(["C", "D", "E"])
+G.add_edges_from([("A", "C"), ("B", "D"), ("C", "E")])
+```
+
+---
+
+## 🔹 Visualize the Graph
+
+```python
+plt.figure(figsize=(5,5))
+nx.draw(G, with_labels=True, node_color='lightblue', node_size=2000)
+plt.show()
+```
+
+---
+
+## 🔹 Directed Graph
+
+```python
+DG = nx.DiGraph()
+DG.add_edge("A", "B")
+DG.add_edge("B", "C")
+
+nx.draw(DG, with_labels=True, node_color='lightgreen')
+plt.show()
+```
+
+---
+
+## 🔹 Weighted Graph
+
+```python
+WG = nx.Graph()
+WG.add_edge("A", "B", weight=5)
+WG.add_edge("B", "C", weight=2)
+
+for u, v, data in WG.edges(data=True):
+    print(f"{u} -> {v} weight: {data['weight']}")
+```
+
+---
+
+## 🔹 Convert Tabular Data → Graph
+
+```python
+import pandas as pd
+
+data = {
+    "source": ["A", "A", "B", "C"],
+    "target": ["B", "C", "D", "E"]
+}
+
+df = pd.DataFrame(data)
+
+G = nx.from_pandas_edgelist(df, source="source", target="target")
+
+nx.draw(G, with_labels=True)
+plt.show()
+```
+
+---
+
+## ✅ Summary
+
+* Graph = Nodes + Edges
+* Types: Directed, Undirected, Weighted
+* Can convert real data into graphs
+
+---
+
+---
+
+# 📘 **Notebook 02 — Graph Traversal (BFS & DFS)**
+
+---
+
+---
+
+---
+
+# 📘 **Notebook 03 — Core Graph Algorithms**
+
+---
+
+## 🧠 What You’ll Learn
+
+* Connected Components
+* Shortest Path (Dijkstra)
+* Triangle Count
+
+---
+
+## 🔹 Connected Components
+
+```python
+G = nx.Graph()
+G.add_edges_from([
+    ("A","B"), ("B","C"),
+    ("D","E")
+])
+
+components = list(nx.connected_components(G))
+print("Connected Components:", components)
+```
+
+💡 **Fraud Insight:** Each component = potential fraud cluster
+
+---
+
+## 🔹 Shortest Path (Dijkstra)
+
+```python
+G = nx.Graph()
+G.add_weighted_edges_from([
+    ("A","B",1),
+    ("B","C",2),
+    ("A","C",4)
+])
+
+path = nx.dijkstra_path(G, "A", "C")
+distance = nx.dijkstra_path_length(G, "A", "C")
+
+print("Shortest path:", path)
+print("Distance:", distance)
+```
+
+---
+
+## 🔹 Triangle Count
+
+```python
+G = nx.Graph()
+G.add_edges_from([
+    ("A","B"), ("B","C"), ("C","A"),  # triangle
+    ("C","D")
+])
+
+triangles = nx.triangles(G)
+print("Triangle count per node:", triangles)
+```
+
+💡 **Fraud Insight:** High triangles = tightly connected group
+
+---
+
+## 🔹 Visualize Triangles
+
+```python
+nx.draw(G, with_labels=True, node_color='orange')
+plt.show()
+```
+
+---
+
+## 🔹 Mini Exercise
+
+👉 Find:
+
+* Number of components
+* Shortest path between nodes
+* Nodes with highest triangle count
+
+---
+
+## ✅ Summary
+
+* Connected components → clusters
+* Dijkstra → shortest weighted path
+* Triangle count → dense communities
+
+---
+
+---
+
+# 🚀 What Next?
+
+If you want, I can generate:
+
+✅ Remaining notebooks (Centrality → GNN → Neptune)
+✅ Real fraud dataset for your course
+✅ Advanced notebooks (GraphSAGE, Node2Vec)
+✅ Polished visuals & storytelling
+
+Just tell me 👍
+
+
+Great—this is where your course starts to look **seriously strong**. Below are **production-quality notebook contents (Markdown + code)** for the remaining modules:
+
+---
+
+# 📘 **Notebook 04 — Centrality (Node Importance)**
+
+---
+
+## 🧠 Why Centrality?
+
+Centrality helps identify:
+
+* Influential nodes
+* Fraud orchestrators
+* Key intermediaries (mule accounts)
+
+---
+
+## ⚙️ Setup
+
+```python
+import networkx as nx
+import matplotlib.pyplot as plt
+```
+
+---
+
+## 🔹 Create Graph
+
+```python
+G = nx.Graph()
+edges = [("A","B"), ("A","C"), ("B","D"), ("C","D"), ("D","E")]
+G.add_edges_from(edges)
+
+nx.draw(G, with_labels=True)
+plt.show()
+```
+
+---
+
+## 🔹 Degree Centrality
+
+```python
+deg_cent = nx.degree_centrality(G)
+print("Degree Centrality:", deg_cent)
+```
+
+---
+
+## 🔹 Betweenness Centrality
+
+```python
+bet_cent = nx.betweenness_centrality(G)
+print("Betweenness Centrality:", bet_cent)
+```
+
+💡 High = potential fraud intermediary
+
+---
+
+## 🔹 Closeness Centrality
+
+```python
+close_cent = nx.closeness_centrality(G)
+print("Closeness Centrality:", close_cent)
+```
+
+---
+
+## 🔹 PageRank
+
+```python
+pagerank = nx.pagerank(G)
+print("PageRank:", pagerank)
+```
+
+---
+
+## 🔹 Visualization (Node Size by Importance)
+
+```python
+sizes = [v * 3000 for v in deg_cent.values()]
+
+nx.draw(G, with_labels=True, node_size=sizes)
+plt.show()
+```
+
+---
+
+## ✅ Summary
+
+* Degree → popularity
+* Betweenness → control point
+* PageRank → influence
+
+---
+
+---
+
+# 📘 **Notebook 05 — Community Detection**
+
+---
+
+## 🧠 Why Communities?
+
+Used to detect:
+
+* Fraud rings
+* Customer segments
+
+---
+
+## 🔹 Create Graph
+
+```python
+import networkx as nx
+import matplotlib.pyplot as plt
+
+G = nx.karate_club_graph()
+nx.draw(G, node_size=50)
+plt.show()
+```
+
+---
+
+## 🔹 Connected Components
+
+```python
+components = list(nx.connected_components(G))
+print("Components:", components)
+```
+
+---
+
+## 🔹 Label Propagation
+
+```python
+communities = nx.algorithms.community.label_propagation_communities(G)
+communities = list(communities)
+
+print("Communities:", communities)
+```
+
+---
+
+## 🔹 Visualize Communities
+
+```python
+color_map = []
+for node in G:
+    for i, comm in enumerate(communities):
+        if node in comm:
+            color_map.append(i)
+
+nx.draw(G, node_color=color_map, with_labels=True)
+plt.show()
+```
+
+---
+
+## 💡 Fraud Insight
+
+Clusters = potential fraud rings
+
+---
+
+---
+
+# 📘 **Notebook 06 — Link Prediction**
+
+---
+
+## 🧠 Goal
+
+Predict:
+
+* Future links
+* Suspicious connections
+
+---
+
+## 🔹 Create Graph
+
+```python
+G = nx.Graph()
+G.add_edges_from([("A","B"), ("A","C"), ("B","D")])
+```
+
+---
+
+## 🔹 Common Neighbors
+
+```python
+list(nx.common_neighbors(G, "C", "D"))
+```
+
+---
+
+## 🔹 Jaccard Coefficient
+
+```python
+preds = nx.jaccard_coefficient(G)
+for u, v, p in preds:
+    print(u, v, p)
+```
+
+---
+
+## 🔹 Adamic-Adar
+
+```python
+preds = nx.adamic_adar_index(G)
+for u, v, p in preds:
+    print(u, v, p)
+```
+
+---
+
+## 💡 Fraud Insight
+
+High score = potential hidden connection
+
+---
+
+---
+
+# 📘 **Notebook 07 — Similarity**
+
+---
+
+## 🧠 Why Similarity?
+
+* Find similar users
+* Entity matching
+
+---
+
+## 🔹 Jaccard Similarity
+
+```python
+list(nx.jaccard_coefficient(G))
+```
+
+---
+
+## 🔹 Cosine Similarity (Manual)
+
+```python
+from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
+
+vec1 = np.array([1,0,1])
+vec2 = np.array([1,1,0])
+
+cosine_similarity([vec1], [vec2])
+```
+
+---
+
+## 💡 Use Case
+
+Find users behaving similarly to fraudsters
+
+---
+
+---
+
+# 📘 **Notebook 08 — Graph Embeddings (Node2Vec)**
+
+---
+
+## 🧠 Why Embeddings?
+
+Convert graph → ML features
+
+---
+
+## ⚙️ Install
+
+```python
+# !pip install node2vec
+```
+
+---
+
+## 🔹 Generate Embeddings
+
+```python
+from node2vec import Node2Vec
+
+G = nx.karate_club_graph()
+
+node2vec = Node2Vec(G, dimensions=16, walk_length=10, num_walks=50)
+model = node2vec.fit()
+
+model.wv['0']
+```
+
+---
+
+## 🔹 Visualize Embeddings
+
+```python
+from sklearn.decomposition import PCA
+
+X = [model.wv[str(i)] for i in G.nodes()]
+pca = PCA(n_components=2)
+coords = pca.fit_transform(X)
+
+plt.scatter(coords[:,0], coords[:,1])
+plt.show()
+```
+
+---
+
+## 💡 Insight
+
+Similar nodes → closer in embedding space
+
+---
+
+---
+
+# 📘 **Notebook 09 — Graph Machine Learning**
+
+---
+
+## 🧠 Goal
+
+Use graph features for ML
+
+---
+
+## 🔹 Create Features
+
+```python
+deg = nx.degree_centrality(G)
+pagerank = nx.pagerank(G)
+
+features = []
+for node in G.nodes():
+    features.append([deg[node], pagerank[node]])
+```
+
+---
+
+## 🔹 Dummy Labels
+
+```python
+labels = [0 if i < 10 else 1 for i in range(len(features))]
+```
+
+---
+
+## 🔹 Train Model
+
+```python
+from sklearn.ensemble import RandomForestClassifier
+
+model = RandomForestClassifier()
+model.fit(features, labels)
+```
+
+---
+
+## 💡 Insight
+
+Graph features improve ML performance
+
+---
+
+---
+
+# 📘 **Notebook 10 — Graph Databases (Neo4j)**
+
+---
+
+## 🧠 Why Graph DB?
+
+Efficient for connected data
+
+---
+
+## 🔹 Cypher Basics
+
+```sql
+CREATE (a:Person {name: "Alice"})
+CREATE (b:Person {name: "Bob"})
+CREATE (a)-[:KNOWS]->(b)
+```
+
+---
+
+## 🔹 Query
+
+```sql
+MATCH (a)-[:KNOWS]->(b)
+RETURN a, b
+```
+
+---
+
+---
+
+# 📘 **Notebook 11 — Neptune Analytics**
+
+---
+
+## 🧠 Why Neptune?
+
+* Fully managed
+* Scales large graphs
+* Supports Gremlin & SPARQL
+
+---
+
+## 🔹 Sample Gremlin Query
+
+```python
+g.V().has('name','Alice').out('transacts_with')
+```
+
+---
+
+## 🔹 Run Centrality (Conceptual)
+
+```python
+# Neptune Analytics example (pseudo)
+CALL neptune.algo.pageRank()
+```
+
+---
+
+## 💡 Use Case
+
+Detect fraud rings at scale
+
+---
+
+---
+
+# 📘 **Notebook 12 — Real-World Use Case (Fraud Detection)**
+
+---
+
+## 🔹 Build Graph
+
+```python
+G = nx.Graph()
+
+transactions = [
+    ("A","B"), ("B","C"), ("C","A"),  # fraud ring
+    ("D","E")
+]
+
+G.add_edges_from(transactions)
+```
+
+---
+
+## 🔹 Detect Communities
+
+```python
+list(nx.connected_components(G))
+```
+
+---
+
+## 🔹 Centrality
+
+```python
+nx.betweenness_centrality(G)
+```
+
+---
+
+## 🔹 Insight
+
+* Triangle = fraud ring
+* High centrality = mule
+
+---
+
+---
+
+# 📘 **Notebook 13 — Capstone Project**
+
+---
+
+## 🎯 Objective
+
+Detect fraud rings using graph analytics
+
+---
+
+## 🔹 Steps
+
+```python
+# 1. Build graph
+# 2. Detect communities
+# 3. Compute centrality
+# 4. Generate features
+# 5. Train ML model
+```
+
+---
+
+## 🧠 Expected Output
+
+* Fraud clusters
+* Suspicious nodes
+* ML predictions
+
+---
+
+# 🚀 Final Note
+
+This course now covers:
+
+✅ Fundamentals → Advanced Graph ML
+✅ Hands-on coding
+✅ Real fraud use-cases
+✅ Neptune relevance (huge differentiator)
+
+---
