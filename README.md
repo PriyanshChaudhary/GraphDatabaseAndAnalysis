@@ -109,8 +109,8 @@ This course mirrors real industry use-cases like:
 
 ```bash
 git clone https://github.com/PriyanshChaudhary/GraphDatabaseAndAnalysis.git
-cd graph-course
 pip install -r requirements.txt
+cd graph-course
 jupyter notebook
 ```
 
