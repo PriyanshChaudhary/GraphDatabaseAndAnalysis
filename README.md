@@ -109,8 +109,8 @@ This course mirrors real industry use-cases like:
 
 ```bash
 git clone https://github.com/PriyanshChaudhary/GraphDatabaseAndAnalysis.git
-cd graph-course
 pip install -r requirements.txt
+cd graph-course
 jupyter notebook
 ```
 
@@ -168,8 +168,7 @@ Senior Data Scientist | Fraud & Risk | ML & Graph Analytics
 
 ## 📬 Let’s Connect
 
-* LinkedIn: *(add your link)*
-* GitHub: *(your profile)*
+* LinkedIn: www.linkedin.com/in/priyansh-chaudhary-aiml
 
 ---
 
