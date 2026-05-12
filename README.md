@@ -168,8 +168,7 @@ Senior Data Scientist | Fraud & Risk | ML & Graph Analytics
 
 ## 📬 Let’s Connect
 
-* LinkedIn: *(add your link)*
-* GitHub: *(your profile)*
+* LinkedIn: www.linkedin.com/in/priyansh-chaudhary-aiml
 
 ---
 
